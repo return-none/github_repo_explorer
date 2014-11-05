@@ -11,12 +11,18 @@ app.controller('mainCtrl', function ($scope, $http) {
         }
     };
 
+    $scope.languages_table = {
+        order: 'name',
+        reverse: false,
+        data: []
+    };
+
     $http.get("https://api.github.com/repos/angular/angular.js/languages").success(function (response) {
         $scope.languages_chart.data = Object.keys(response).map(function (key) {
             return {x: key, y: [response[key]]}
         });
 
-        $scope.languages_table = Object.keys(response).map(function (key) {
+        $scope.languages_table.data = Object.keys(response).map(function (key) {
             return {
                 name: key,
                 size: response[key]

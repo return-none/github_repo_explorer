@@ -20,12 +20,24 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Size</th>
+                                <th ng-click="languages_table.order='name'; languages_table.reverse = !languages_table.reverse">
+                                    Name
+                                    <span ng-show="languages_table.order == 'name'">
+                                        <span ng-show="!languages_table.reverse">&#9650;</span>
+                                        <span ng-show="languages_table.reverse">&#9660;</span>
+                                    </span>
+                                </th>
+                                <th ng-click="languages_table.order='size'; languages_table.reverse = !languages_table.reverse">
+                                    Size
+                                    <span ng-show="languages_table.order == 'size'">
+                                        <span ng-show="!languages_table.reverse">&#9650;</span>
+                                        <span ng-show="languages_table.reverse">&#9660;</span>
+                                    </span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="language in languages_table">
+                            <tr ng-repeat="language in languages_table.data|orderBy:languages_table.order:languages_table.reverse">
                                 <td>{{language.name}}</td>
                                 <td>{{language.size}}</td>
                             </tr>
