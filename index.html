@@ -10,14 +10,27 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/angular.charts/0.2.0/angular-charts.min.js"></script>
 </head>
-<body ng-app='myApp'>
+<body ng-app='githubExplorer'>
     <div class="container">
         <h1 class="text-center">What does angular.js consist of</h1>
         <div class="row" ng-controller="mainCtrl">
             <h3 class="text-center" ng-hide="loaded">Loading...</h3>
             <div ng-show="loaded">
-                <div class="col-md-6 col-sm-6 text-center">
-                    coming soon
+                <div class="col-md-6 col-sm-6">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="language in languages_table">
+                                <td>{{language.name}}</td>
+                                <td>{{language.size}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div data-ac-chart="'pie'" data-ac-data="languages_chart" data-ac-config="languages_chart_config" class="ac-chart"></div>

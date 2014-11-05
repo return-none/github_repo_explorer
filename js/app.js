@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['angularCharts']);
+var app = angular.module('githubExplorer', ['angularCharts']);
 
 app.controller('mainCtrl', function ($scope, $http) {
     $scope.loaded = false;
@@ -15,6 +15,14 @@ app.controller('mainCtrl', function ($scope, $http) {
         $scope.languages_chart.data = Object.keys(response).map(function (key) {
             return {x: key, y: [response[key]]}
         });
+
+        $scope.languages_table = Object.keys(response).map(function (key) {
+            return {
+                name: key,
+                size: response[key]
+            };
+        });
+
         $scope.loaded = true;
     });
 });
