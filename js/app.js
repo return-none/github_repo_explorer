@@ -1,11 +1,9 @@
-var app = angular.module('myApp', ['ngGrid', 'angularCharts']);
+var app = angular.module('myApp', ['angularCharts']);
 
 app.controller('mainCtrl', function ($scope, $http) {
     $scope.loaded = false;
-    $scope.languages_table = [];
-    $scope.languages_chart = [];
 
-    $scope.gridOptions = { data: 'languages_table' };
+    $scope.languages_chart = {};
     $scope.languages_chart_config = {
         legend: {
             display: true,
@@ -13,18 +11,10 @@ app.controller('mainCtrl', function ($scope, $http) {
         }
     };
 
-    $http.get("https://api.github.com/repos/angular/angular.js/languages").success(function(data) {
-        $scope.languages_table = Object.keys(data).map(function(current) {
-            return {
-                name: current,
-                size: data[current]
-            };
+    $http.get("https://api.github.com/repos/angular/angular.js/languages").success(function (response) {
+        $scope.languages_chart.data = Object.keys(response).map(function (key) {
+            return {x: key, y: [response[key]]}
         });
-        $scope.languages_chart = {
-            data: $scope.languages_table.map(function(item) {
-                return { x: item.name, y: [item.size] };
-            })
-        };
         $scope.loaded = true;
     });
 });
